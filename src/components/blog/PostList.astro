@@ -1,11 +1,9 @@
 ---
-// src/components/Blog/PostList.astro
+// src/components/blog/PostList.astro
 import FormattedDate from "../FormattedDate.astro";
 
-// API URL
 const API_URL = import.meta.env.PUBLIC_API_URL + "/posts";
 
-// DEFINE POSTS INTERFACE
 interface Post {
     id: number;
     title: string;
@@ -18,26 +16,40 @@ let posts: Post[] = [];
 let errorMessage = null;
 
 try {
-    const response = await fetch(API_URL);
+    //Create Abort Controller
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 4000); // 4 segundos max
+
+    const response = await fetch(API_URL, {
+        signal: controller.signal,
+    });
+
+    clearTimeout(timeoutId);
 
     if (!response.ok) {
         throw new Error(`API ERROR: ${response.status} ${response.statusText}`);
     }
 
     const jsonResponse = await response.json();
-
-    // Get Posts
     posts = jsonResponse.data || [];
-} catch (error) {
-    console.error("Error loading posts:", error);
-    errorMessage = "The posts could not be loaded at this time..";
+} catch (error: any) {
+    console.error("Error loading posts on Azure:", error);
+
+    //
+    if (error.name === "AbortError") {
+        errorMessage = `Connection Timeout: The API at: ${API_URL}  ... took too long to respond.`;
+    } else {
+        errorMessage = `Backend Error: ${error.message} (Target URL: ${API_URL})`;
+    }
 }
 ---
 
 {
     errorMessage && (
         <div class="error-box">
-            <p>{errorMessage}</p>
+            <p>
+                <strong>⚠️ Frontend Alert:</strong> {errorMessage}
+            </p>
         </div>
     )
 }
@@ -64,82 +76,3 @@ try {
         ))
     }
 </ul>
-
-<style>
-    /* We keep the specific list styles here to ensure encapsulation 
-       and keep the main page clean.
-    */
-    ul {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 2rem;
-        list-style-type: none;
-        margin: 0;
-        padding: 0;
-    }
-    ul li {
-        width: calc(50% - 1rem);
-    }
-    ul li * {
-        text-decoration: none;
-        transition: 0.2s ease;
-    }
-    ul li:first-child {
-        width: 100%;
-        margin-bottom: 1rem;
-        text-align: center;
-    }
-    ul li:first-child img {
-        width: 100%;
-    }
-    ul li:first-child .title {
-        font-size: 2.369rem;
-    }
-    ul li img {
-        margin-bottom: 0.5rem;
-        border-radius: 12px;
-        object-fit: cover;
-    }
-    ul li a {
-        display: block;
-    }
-    .title {
-        margin: 0;
-        color: rgb(var(--black));
-        line-height: 1;
-    }
-    .date {
-        margin: 0;
-        color: rgb(var(--gray));
-    }
-    ul li a:hover h4,
-    ul li a:hover .date {
-        color: rgb(var(--accent));
-    }
-    ul a:hover img {
-        box-shadow: var(--box-shadow);
-    }
-    .error-box {
-        background: #ff555522;
-        border: 1px solid #ff5555;
-        color: #ff5555;
-        padding: 1rem;
-        border-radius: 8px;
-        text-align: center;
-    }
-    @media (max-width: 720px) {
-        ul {
-            gap: 0.5em;
-        }
-        ul li {
-            width: 100%;
-            text-align: center;
-        }
-        ul li:first-child {
-            margin-bottom: 0;
-        }
-        ul li:first-child .title {
-            font-size: 1.563em;
-        }
-    }
-</style>

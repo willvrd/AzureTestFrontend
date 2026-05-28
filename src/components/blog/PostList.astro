@@ -2,7 +2,7 @@
 // src/components/blog/PostList.astro
 import FormattedDate from "../FormattedDate.astro";
 
-const API_URL = import.meta.env.PUBLIC_API_URL + "/posts";
+const API_URL = import.meta.env.API_URL + "/posts";
 
 interface Post {
     id: number;
@@ -18,7 +18,7 @@ let errorMessage = null;
 try {
     //Create Abort Controller
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 4000); // 4 segundos max
+    const timeoutId = setTimeout(() => controller.abort(), 5000); // 5max
 
     const response = await fetch(API_URL, {
         signal: controller.signal,

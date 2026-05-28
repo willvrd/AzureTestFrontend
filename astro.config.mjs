@@ -7,7 +7,7 @@ import { defineConfig, fontProviders } from 'astro/config';
 import node from '@astrojs/node';
 
 // Read the frontend URL from environment variables, fallback to example.com if not defined
-const FRONTEND_URL = process.env.PUBLIC_FRONTEND_URL || 'https://example.com';
+const FRONTEND_URL = process.env.FRONTEND_URL || 'https://example.com';
 
 // https://astro.build/config
 export default defineConfig({

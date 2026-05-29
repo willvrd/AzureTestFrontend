@@ -12,7 +12,7 @@ const FRONTEND_URL = process.env.FRONTEND_URL || 'https://example.com';
 // https://astro.build/config
 export default defineConfig({
     site: FRONTEND_URL, // Dynamic frontend site configuration for SEO and Sitemaps
-
+    trailingSlash: 'never', //Configure '/' url
     //=============================================================================
     // INTEGRATIONS
     //=============================================================================

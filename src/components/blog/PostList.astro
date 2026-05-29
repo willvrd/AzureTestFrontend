@@ -18,7 +18,7 @@ let errorMessage = null;
 try {
     //Create Abort Controller
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 5000); // 5max
+    const timeoutId = setTimeout(() => controller.abort(), 25000); // 5max
 
     const response = await fetch(API_URL, {
         signal: controller.signal,

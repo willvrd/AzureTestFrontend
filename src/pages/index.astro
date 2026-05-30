@@ -1,8 +1,15 @@
 ---
+<<<<<<< HEAD
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+=======
+import BaseHead from "../components/BaseHead.astro";
+import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
+>>>>>>> staging
 ---
 
 <!doctype html>
@@ -13,6 +20,7 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 	<body>
 		<Header />
 		<main>
+<<<<<<< HEAD
 			<h1>🧑‍🚀 Hello, Astronaut!</h1>
 			<p>
 				Welcome to the official <a href="https://astro.build/">Astro</a> blog starter template. This template
@@ -43,7 +51,203 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 				<a href="https://github.com/Charca/astro-blog-template">astro-blog-template</a>
 				by <a href="https://twitter.com/Charca">Maxi Ferreira</a>.
 			</p>
+=======
+			<section class="hero">
+				<div class="hero-content">
+					<h1>Fullstack Development</h1>
+					<p class="subtitle">
+						Building modern, blazing-fast, and scalable web
+						applications by combining Astro's speed with .NET's
+						robustness on Azure.
+					</p>
+				</div>
+			</section>
+
+			<section class="features">
+				<h2>The Tech Stack</h2>
+				<div class="features-grid">
+					<div class="feature-card">
+						<div class="icon">🚀</div>
+						<h3>Astro Frontend</h3>
+						<p>
+							Ultra-fast rendering, islands architecture, and
+							native SEO optimization for the ultimate user
+							experience.
+						</p>
+					</div>
+					<div class="feature-card">
+						<div class="icon">⚙️</div>
+						<h3>.NET 8 Web API</h3>
+						<p>
+							Robust backend built under a modular architecture,
+							ready for high performance and complex business
+							logic.
+						</p>
+					</div>
+					<div class="feature-card">
+						<div class="icon">☁️</div>
+						<h3>Azure Cloud</h3>
+						<p>
+							Automated deployment using App Services, SQL Server
+							databases, and optimized storage via Blob Storage.
+						</p>
+					</div>
+				</div>
+			</section>
+
+			<section class="project-status">
+				<div class="status-box">
+					<h3>Project Status</h3>
+					<p>
+						Currently in active development, testing Continuous
+						Integration and Deployment (CI/CD) pipelines with
+						isolated staging environments.
+					</p>
+				</div>
+			</section>
+>>>>>>> staging
 		</main>
 		<Footer />
 	</body>
 </html>
+<<<<<<< HEAD
+=======
+
+<style>
+	/* 🎨 Clean & Modern Styles */
+	main {
+		width: 100%;
+		max-width: 960px;
+		margin: 0 auto;
+		padding: 2rem 1rem;
+	}
+
+	/* Hero */
+	.hero {
+		padding: 4rem 0;
+		text-align: center;
+	}
+	.hero h1 {
+		font-size: 3.5rem;
+		font-weight: 800;
+		line-height: 1.1;
+		margin-bottom: 1.5rem;
+		color: rgb(var(--black));
+	}
+	.text-gradient {
+		background: linear-gradient(45deg, rgb(var(--accent)), #4f46e5);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+	}
+	.subtitle {
+		font-size: 1.25rem;
+		color: rgb(var(--gray));
+		max-width: 600px;
+		margin: 0 auto 2rem auto;
+		line-height: 1.6;
+	}
+
+	/* Buttons */
+	.cta-buttons {
+		display: flex;
+		gap: 1rem;
+		justify-content: center;
+	}
+	.btn {
+		display: inline-block;
+		padding: 0.8rem 1.6rem;
+		border-radius: 8px;
+		font-weight: 600;
+		text-decoration: none;
+		transition:
+			transform 0.2s,
+			box-shadow 0.2s;
+	}
+	.btn:hover {
+		transform: translateY(-2px);
+	}
+	.btn-primary {
+		background-color: rgb(var(--accent));
+		color: white;
+		box-shadow: 0 4px 14px rgba(var(--accent), 0.3);
+	}
+	.btn-secondary {
+		background-color: rgba(var(--gray), 0.1);
+		color: rgb(var(--black));
+		border: 1px solid rgba(var(--gray), 0.2);
+	}
+
+	/* Features Grid */
+	.features {
+		padding: 4rem 0;
+	}
+	.features h2 {
+		font-size: 2rem;
+		text-align: center;
+		margin-bottom: 3rem;
+		color: rgb(var(--black));
+	}
+	.features-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+		gap: 2rem;
+	}
+	.feature-card {
+		background: white;
+		padding: 2rem;
+		border-radius: 12px;
+		border: 1px solid rgba(var(--gray), 0.2);
+		box-shadow: var(--box-shadow);
+		transition: border-color 0.2s;
+	}
+	.feature-card:hover {
+		border-color: rgb(var(--accent));
+	}
+	.feature-card .icon {
+		font-size: 2rem;
+		margin-bottom: 1rem;
+	}
+	.feature-card h3 {
+		margin: 0 0 0.5rem 0;
+		font-size: 1.35rem;
+	}
+	.feature-card p {
+		margin: 0;
+		color: rgb(var(--gray));
+		font-size: 0.95rem;
+		line-height: 1.5;
+	}
+
+	/* Status Box */
+	.project-status {
+		padding: 2rem 0;
+	}
+	.status-box {
+		background-color: rgba(var(--accent), 0.05);
+		border-left: 4px solid rgb(var(--accent));
+		padding: 1.5rem;
+		border-radius: 0 12px 12px 0;
+	}
+	.status-box h3 {
+		margin: 0 0 0.5rem 0;
+		color: rgb(var(--accent));
+	}
+	.status-box p {
+		margin: 0;
+		color: rgb(var(--gray));
+	}
+
+	/* Responsive */
+	@media (max-width: 720px) {
+		.hero h1 {
+			font-size: 2.5rem;
+		}
+		.subtitle {
+			font-size: 1.1rem;
+		}
+		.cta-buttons {
+			flex-direction: column;
+		}
+	}
+</style>
+>>>>>>> staging

@@ -1,27 +1,15 @@
 ---
-<<<<<<< HEAD
-import { Image } from 'astro:assets';
-import { getCollection } from 'astro:content';
-import BaseHead from '../../components/BaseHead.astro';
-import Footer from '../../components/Footer.astro';
-import FormattedDate from '../../components/FormattedDate.astro';
-import Header from '../../components/Header.astro';
-import { SITE_DESCRIPTION, SITE_TITLE } from '../../consts';
-
-const posts = (await getCollection('blog')).sort(
-	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-);
-=======
-// src/pages/blog/index.astro
-export const prerender = false;
-
+import { Image } from "astro:assets";
+import { getCollection } from "astro:content";
 import BaseHead from "../../components/BaseHead.astro";
 import Footer from "../../components/Footer.astro";
+import FormattedDate from "../../components/partials/FormattedDate.astro";
 import Header from "../../components/Header.astro";
-import Loading from "../../components/partials/Loading.astro";
-import PostList from "../../components/blog/PostList/PostList.astro";
 import { SITE_DESCRIPTION, SITE_TITLE } from "../../consts";
->>>>>>> staging
+
+const posts = (await getCollection("blog")).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
 ---
 
 <!doctype html>
@@ -32,7 +20,6 @@ import { SITE_DESCRIPTION, SITE_TITLE } from "../../consts";
 			main {
 				width: 960px;
 			}
-<<<<<<< HEAD
 			ul {
 				display: flex;
 				flex-wrap: wrap;
@@ -97,39 +84,36 @@ import { SITE_DESCRIPTION, SITE_TITLE } from "../../consts";
 					font-size: 1.563em;
 				}
 			}
-=======
->>>>>>> staging
 		</style>
 	</head>
 	<body>
 		<Header />
 		<main>
-<<<<<<< HEAD
 			<section>
 				<ul>
 					{
 						posts.map((post) => (
 							<li>
-								<a href={`/blog/${post.id}/`}>
+								<a href={`/blog-example/${post.id}/`}>
 									{post.data.heroImage && (
-										<Image width={720} height={360} src={post.data.heroImage} alt="" />
+										<Image
+											width={720}
+											height={360}
+											src={post.data.heroImage}
+											alt=""
+										/>
 									)}
 									<h4 class="title">{post.data.title}</h4>
 									<p class="date">
-										<FormattedDate date={post.data.pubDate} />
+										<FormattedDate
+											date={post.data.pubDate}
+										/>
 									</p>
 								</a>
 							</li>
 						))
 					}
 				</ul>
-=======
-			<h2 style="text-align: center;">Data from API</h2>
-			<section>
-				<PostList server:defer>
-					<Loading slot="fallback" message="Loading content..." />
-				</PostList>
->>>>>>> staging
 			</section>
 		</main>
 		<Footer />

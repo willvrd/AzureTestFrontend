@@ -1,0 +1,90 @@
+---
+// src/components/blog/PostList.astro
+import FormattedDate from "../../partials/FormattedDate.astro";
+import "./Styles.css";
+
+//BASE API URL
+const BASE_API_URL = import.meta.env.API_URL + "/posts";
+
+//ADD FILTERS
+const params = new URLSearchParams({
+    orderField: "sortOrder",
+    orderWay: "asc",
+});
+
+//FINAL URL
+const API_URL = `${BASE_API_URL}?${params.toString()}`;
+
+//Post
+interface Post {
+    id: number;
+    title: string;
+    slug: string;
+    content?: string;
+    imageFullUrl?: string;
+    createdAt: string;
+}
+
+//Get Data
+let posts: Post[] = [];
+let errorMessage = null;
+
+try {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 25000);
+
+    const response = await fetch(API_URL, {
+        signal: controller.signal,
+    });
+
+    clearTimeout(timeoutId);
+
+    if (!response.ok) {
+        throw new Error(`API ERROR: ${response.status} ${response.statusText}`);
+    }
+
+    const jsonResponse = await response.json();
+    posts = jsonResponse.data || [];
+} catch (error: any) {
+    console.error("Error loading posts on Azure:", error);
+
+    if (error.name === "AbortError") {
+        errorMessage = `Connection Timeout: The API took too long to respond.`;
+    } else {
+        errorMessage = `Backend Error: ${error.message}`;
+    }
+}
+---
+
+{
+    errorMessage && (
+        <div class="error-box">
+            <p>
+                <strong>⚠️ Frontend Alert: </strong> {errorMessage}
+            </p>
+        </div>
+    )
+}
+
+<ul>
+    {
+        posts.map((post) => (
+            <li>
+                <a href={`/blog/${post.slug}`}>
+                    {post.imageFullUrl && (
+                        <img
+                            width={720}
+                            height={360}
+                            src={post.imageFullUrl}
+                            alt={post.title}
+                        />
+                    )}
+                    <h4 class="title">{post.title}</h4>
+                    <p class="date">
+                        <FormattedDate date={new Date(post.createdAt)} />
+                    </p>
+                </a>
+            </li>
+        ))
+    }
+</ul>

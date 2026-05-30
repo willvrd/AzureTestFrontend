@@ -1,0 +1,47 @@
+---
+// src/components/blog/PostShow/PostShow.astro
+import FormattedDate from "../../partials/FormattedDate.astro";
+import "./Styles.css";
+
+//Data PROPS to component
+interface Props {
+    post: {
+        title: string;
+        content?: string;
+        imageFullUrl?: string;
+        createdAt: string;
+    };
+}
+
+const { post } = Astro.props;
+---
+
+<article class="post-container">
+    <div class="back-link-container">
+        <a href="/blog" class="back-link">
+            <span class="arrow">←</span> Back to Blog
+        </a>
+    </div>
+
+    <div class="prose">
+        <div class="title">
+            <div class="date">
+                <FormattedDate date={new Date(post.createdAt)} />
+            </div>
+            <h1>{post.title}</h1>
+            <hr />
+        </div>
+
+        {
+            post.imageFullUrl && (
+                <div class="hero-image">
+                    <img src={post.imageFullUrl} alt={post.title} />
+                </div>
+            )
+        }
+
+        <div class="content">
+            <p>{post.content}</p>
+        </div>
+    </div>
+</article>

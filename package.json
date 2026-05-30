@@ -6,32 +6,20 @@
     "node": ">=22.12.0"
   },
   "scripts": {
-<<<<<<< HEAD
-    "dev": "astro dev",
-=======
     "dev": " cross-env NODE_TLS_REJECT_UNAUTHORIZED=0 astro dev",
->>>>>>> staging
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro"
   },
   "dependencies": {
     "@astrojs/mdx": "^5.0.6",
-<<<<<<< HEAD
-=======
     "@astrojs/node": "^10.1.1",
->>>>>>> staging
     "@astrojs/rss": "^4.0.18",
     "@astrojs/sitemap": "^3.7.2",
     "astro": "^6.3.7",
     "sharp": "^0.34.3"
-<<<<<<< HEAD
-  }
-}
-=======
   },
   "devDependencies": {
     "cross-env": "^10.1.0"
   }
 }
->>>>>>> staging
